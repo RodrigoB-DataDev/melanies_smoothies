@@ -1,9 +1,10 @@
 # Import python packages
 import streamlit as st
+import requests
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
-st.title(f"Customize Your Smoothie! :balloon: {st.__version__}")
+st.title(f"Customize Your Smoothie! :balloon:")
 st.write(
   """Choose the fruits.
   """
@@ -34,3 +35,7 @@ if ingredients_list:
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered!', icon="✅")
+
+
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
